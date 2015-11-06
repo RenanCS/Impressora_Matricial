@@ -51,7 +51,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 
 	
 		
-	private Nodo<T> raiz;
+	public Nodo<T> raiz;
 
 	public void inserir(T chave) {
 		raiz = inserir0(raiz, chave);
@@ -619,7 +619,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	//Método que soma os espaços das casas decimais.
-	private int RetornaTotalCasasDecimais(Nodo nodo, String lado, boolean espacoFora){
+	public int RetornaTotalCasasDecimais(Nodo nodo, String lado, boolean espacoFora){
 		
 			if(lado.equals("esq")){
 				int casasDecimaisEsquerdoDoNodo = 0;	

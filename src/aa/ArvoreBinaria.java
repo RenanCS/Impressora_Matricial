@@ -1,5 +1,7 @@
 package aa;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +17,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	public class Nodo<T> {
 
 		public T chave;
+
 		
 		public int altura;	
 		public int dentroEsquerdo;
@@ -48,9 +51,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	private Stack<Nodo> aLista = new Stack<Nodo>();
-
-	
-		
+	public int Contador;		
 	public Nodo<T> raiz;
 
 	public void inserir(T chave) {
@@ -470,7 +471,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	//Método que retorna o nível do nodo específico
-	private int retornaNivel(T valor){
+	public int retornaNivel(T valor){
 		return retornaNivel0(raiz, valor);
 	}
 	
@@ -487,8 +488,8 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	//Método que complementa os caracteres de referência de espaço do nodo
-	private String PrintNodo(Nodo nodoAtual){
-		
+	public String PrintNodo(Nodo nodoAtual){
+
 			String printNivel ="";
 			
 			int casasDecimaisEsquerdoDoNodoDaEsquerda =0;
@@ -519,18 +520,21 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 			
 	//Método que faz o percurso mais a esquerda ou direta, para imprimir a linha
-	private void print_tree(Nodo raiz){
+	public void print_tree(Nodo raiz){
+		Contador = 0;
 		Stack<Nodo>  lNivel = preencheListaNivel(raiz);
 		int quantItens = lNivel.size();
 		int i=0;	
 		String PrintTela = "";
 		boolean bPodeImprimir= false;
+		Contador += 6;
 		while(i < quantItens){
 			Nodo nodoAtual = lNivel.get(i);
-			
+			Contador += 13;
 			if(PrintTela == "" && (i+1) < quantItens && nodoAtual.nivel != lNivel.get(i+1).nivel && nodoAtual.pai == null){
 				PrintTela += PrintNodo(nodoAtual);
 				bPodeImprimir = true;
+				Contador += 3;
 			}
 			else{ 
 				
@@ -539,53 +543,70 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 				int iValorPai = 0;
 				int p = 0;
 				Nodo InicioPai =  lNivel.get(0);
-				
+				Contador += 7;
 				if(PrintTela == ""){
+					Contador += 3;
 					iValorPai = (int) lNivel.get(0).chave;
 				}else{
+					Contador += 5;
 					if(PrintTela.contains(lNivel.get(i - 1).chave.toString())){
-							bValorAnt = true;
+						Contador+= 1;
+						bValorAnt = true;
 					}
 				}
 				
 				while(p < quantItens){
+						Contador += 9;					
 						//NAO TEM VALOR DA VARIAVEL ANTERIOR DENTRO DA STRING
 						if(!bValorAnt && ((Comparable<T>) lNivel.get(p).chave).compareTo((T) nodoAtual.chave) < 0 && (naoAncestral(lNivel.get(p),nodoAtual))){
 							PrintTela +=  String.format("%1$-"+ lNivel.get(p).chave.toString().length() +"s","");	
 						}//JA TEM VALOR DA VARIAVEL ANTERIOR DENTRO DA STRING
 						else if (((Comparable<T>) lNivel.get(p).chave).compareTo((T) nodoAtual.chave) < 0 ){
+							Contador += 19;
+							
 							//SE TEM FILHO DIREITO && O ATUAL É O PROXIMO DA FILA && NÃO É ANCESTRAL DO ANTERIOR 
 							if(lNivel.get(i - 1).direito != null && ((Comparable<T>) lNivel.get(p).chave).compareTo((T) lNivel.get(i - 1).direito.chave ) > 0  && (naoAncestral(lNivel.get(p),nodoAtual))){
 								PrintTela +=  String.format("%1$-"+ lNivel.get(p).chave.toString().length() +"s","");	
 							//SE O NODO ATUAL É O PRÓXIMO DA FILA  && NÃO EH ANCESTRAL DO ANTERIOR	
 							}else if(((Comparable<T>) lNivel.get(p).chave).compareTo((T) lNivel.get(i - 1).chave ) > 0 && (naoAncestral(lNivel.get(p),nodoAtual))){
+								Contador += 12;
+								
 								if(lNivel.get(i - 1).direito != null )
-								{	//SE O NODO ANTERIOR É DIFERENTE DO NODO ATUAL && NODO ATUAL É O PRÓXIMO DA FILA
+								{	
+									Contador += 15;
+									//SE O NODO ANTERIOR É DIFERENTE DO NODO ATUAL && NODO ATUAL É O PRÓXIMO DA FILA
 									if( lNivel.get(i - 1).direito.chave !=  lNivel.get(p).chave &&   ((Comparable<T>) lNivel.get(p).chave).compareTo((T) lNivel.get(i - 1).direito.chave) > 0 ){
-									PrintTela +=  String.format("%1$-"+ lNivel.get(p).chave.toString().length() +"s","");	
+										Contador += 7;
+										PrintTela +=  String.format("%1$-"+ lNivel.get(p).chave.toString().length() +"s","");	
 									}
 								}
 								else{
+									Contador += 7;
 									PrintTela +=  String.format("%1$-"+ lNivel.get(p).chave.toString().length() +"s","");	
 								}
 							}
 						}
+						Contador += 2;
 					p++;
 				}
 			
 				PrintTela += PrintNodo(nodoAtual);
-				
+			    Contador +=4;
 				if(i+1 >= quantItens){
-						bPodeImprimir=true;					
+					Contador +=1;	
+					bPodeImprimir=true;					
 				}else if(nodoAtual.nivel != lNivel.get(i+1).nivel){
 					bPodeImprimir=true;						
+					Contador += 6;
 				}	
 			}
 			i++;
+			Contador += 3;
 			if(bPodeImprimir){
 				System.out.println(PrintTela);
 				PrintTela = "";
 				bPodeImprimir= false;
+				Contador += 4;
 			}
 		}
 	}
@@ -649,7 +670,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	//Método que complementa com ífens e referência para colocar pipe para o lado direito 
-	private String MontaNivelDireitoNodoAtual(Nodo direito) {
+	public String MontaNivelDireitoNodoAtual(Nodo direito) {
 		String sPrint = "";
 		//Lado Direito
 		int casasDecimaisDireitoDoNodo =RetornaTotalCasasDecimais(direito,"dir",false);
@@ -685,7 +706,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 
 	//Método que calcula o total das casas decimais de cada string
-	private int calculaCasaDecimas(Nodo nodo, int count){
+	public int calculaCasaDecimas(Nodo nodo, int count){
 		if(nodo == null) return count += 0;
 		else{
 			if(nodo.esquerdo != null){
@@ -698,6 +719,24 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 		}
 		return count;
 	}
+	
+	
+	public void Gravar(String texto){  
+	    String conteudo = texto;  
+	    try{  
+	        // o true significa q o arquivo será constante  
+	        FileWriter x = new FileWriter("C:\\Users\\Renan\\Documents\\GitHub\\aa\\BLA.csv",true);   
+
+
+	        conteudo += "\n"; // criando nova linha e recuo no arquivo              
+	        x.write(conteudo); // armazena o texto no objeto x, que aponta para o arquivo             
+	        x.close(); // cria o arquivo              
+	     }  
+	    // em caso de erro apreenta mensagem abaixo  
+	    catch(Exception e){  
+	      
+	    }  
+	}  
 	
 
 }

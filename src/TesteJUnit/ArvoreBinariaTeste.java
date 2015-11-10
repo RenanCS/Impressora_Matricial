@@ -155,10 +155,10 @@ public class ArvoreBinariaTeste {
 			tree = new ArvoreBinaria<Integer>();
 			Random rnd = new Random();
 			
-			for (int i = 0; i < 1100; i++) {
+			for (int i = 0; i < 10000; i++) {
 				int numero;
 				do {
-					numero = rnd.nextInt(1000);
+					numero = rnd.nextInt(10010);
 				} while (tree.consultar(numero));
 				tree.inserir(numero);
 			}	

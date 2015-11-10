@@ -51,9 +51,10 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 	}
 	
 	private Stack<Nodo> aLista = new Stack<Nodo>();
-	public int Contador;		
+	public long Contador;		
 	public Nodo<T> raiz;
-
+	public String sPrintFinal;		
+	
 	public void inserir(T chave) {
 		raiz = inserir0(raiz, chave);
 	}
@@ -521,6 +522,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 			
 	//Método que faz o percurso mais a esquerda ou direta, para imprimir a linha
 	public void print_tree(Nodo raiz){
+		sPrintFinal = "";
 		Contador = 0;
 		Stack<Nodo>  lNivel = preencheListaNivel(raiz);
 		int quantItens = lNivel.size();
@@ -604,6 +606,7 @@ public class ArvoreBinaria <T extends Comparable<T>> {
 			Contador += 3;
 			if(bPodeImprimir){
 				System.out.println(PrintTela);
+				sPrintFinal += PrintTela;
 				PrintTela = "";
 				bPodeImprimir= false;
 				Contador += 4;

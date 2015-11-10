@@ -14,111 +14,148 @@ public class ArvoreBinariaTeste {
 	ArvoreBinaria<Integer>tree;
 	@Before
 	public void setUp() throws Exception {
-	tree = new ArvoreBinaria<Integer>();
-		//Preenchimento de 3 valores 
-		tree.inserir(262); 
-		tree.inserir(80); 
-		tree.inserir(332);
+	
 	}
 
 	/*################### 5 TESTES SIMPLES ###################*/
 	@Test
-	public void testPreencheListaNivel() {
-		//Após adicionar 3 valores, terá que retornar um lista de nível informando a quantidade.
-		assertEquals(3, tree.preencheListaNivel(tree.raiz).size());
+	public void testPrintFacil01() {
+		tree = new ArvoreBinaria<Integer>();
+		//Preenchimento de 3 valores 
+		tree.inserir(19); 
+		tree.inserir(6); 
+		tree.inserir(22);
+		tree.inserir(0);
+		tree.inserir(11);
+		tree.inserir(50);
+		
+		tree.ImprimeArvore();
+		assertEquals(" |··19·||6·|  22·|0 11    50",tree.sPrintFinal);
 	}
 
 	@Test
-	public void testRetornaTotalCasasDecimais() {
-		//Retorna a quantidade de casas decimais que terá que deixar para 
-		//completar com traços, em relação a direita do nodo da esquerda do pai.
-		assertEquals(6,  tree.RetornaTotalCasasDecimais(tree.raiz,"esq",false));
+	public void testPrintFacil02() {
+		tree = new ArvoreBinaria<Integer>();
+		tree.inserir(27); 
+		tree.inserir(16); 
+		tree.inserir(29);
+		tree.inserir(1);
+		tree.inserir(18);
+		tree.inserir(28);
+		tree.inserir(31);
+		tree.ImprimeArvore();
+		assertEquals(" |···27···||16·|  |·29·|1  18  28  31",tree.sPrintFinal);
 	}
 
 	@Test
-	public void TestMontaNivelDireitoNodoAtual() {
-		//Retorna a montagem do primeiro nivel  
-		assertEquals("|·262··|",  tree.PrintNodo(tree.raiz));
+	public void testPrintFacil03() {
+		tree = new ArvoreBinaria<Integer>();
+		//Preenchimento de 3 valores 
+		tree.inserir(100); 
+		tree.inserir(10); 
+		tree.inserir(200);
+		tree.inserir(9);
+		tree.inserir(15);
+		tree.inserir(150);
+		tree.inserir(201);
+		tree.ImprimeArvore();
+		assertEquals(" |···100·····||10·|   |··200··|9  15   150   201",tree.sPrintFinal);
 	}
 	
 	@Test
-	public void testCalculaCasaDecimas() {
-		//Retorna a montagem do primeiro nivel  
-		assertEquals(8,  tree.calculaCasaDecimas(tree.raiz,0));
-	}
+	public void testPrintFacil04() {
+			tree = new ArvoreBinaria<Integer>();
+			//Preenchimento de 3 valores 
+			tree.inserir(30); 
+			tree.inserir(6); 
+			tree.inserir(31);
+			tree.ImprimeArvore();
+			assertEquals("|30·|6  31",tree.sPrintFinal);	
+		}
+		
 	
+
 	@Test
-	public void testRetornaNivel() {
-		//Retorna a montagem do teprimeiro nivel  
-		assertEquals(1,  tree.retornaNivel(tree.raiz.esquerdo.chave));
-	}
+	public void testPrintFacil05() {
+			tree = new ArvoreBinaria<Integer>();
+			//Preenchimento de 3 valores 
+			tree.inserir(13); 
+			tree.inserir(9); 
+			tree.inserir(18);
+			tree.ImprimeArvore();
+			assertEquals("|13·|9  18",tree.sPrintFinal);	
+		}
 	
 	/*################### 5 TESTES DIFICEIS ###################*/
 	@Test
 	public void TestPrintTelaDificil01() {
 			tree = new ArvoreBinaria<Integer>();
 			//Preenchimento de 3 valores 
-			tree.inserir(262); 
-			tree.inserir(80); 
-			tree.inserir(332);
-			
-			tree.inserir(3); 
-			tree.inserir(164);
-			
-			assertEquals("|80··|",  tree.PrintNodo(tree.raiz.esquerdo));
+			tree.inserir(20); 
+			tree.inserir(18); 
+			tree.inserir(16);
+			tree.inserir(14);
+			tree.ImprimeArvore();
+			assertEquals("    |·20  |·18|·1614", tree.sPrintFinal);
 	}
 
 	@Test
 	public void TestPrintTelaDificil02() {
 			tree = new ArvoreBinaria<Integer>();
 
-			tree.inserir(262); 
-			tree.inserir(80); 
-			tree.inserir(332);
-			tree.inserir(3); 
-			tree.inserir(164);
-			tree.inserir(297); 
-			tree.inserir(353);
-			tree.inserir(73); 
-			tree.inserir(115); 
-			tree.inserir(199);
-			
-			assertEquals("|··332··|",  tree.PrintNodo(tree.raiz.direito));
-	}
+			tree.inserir(30); 
+			tree.inserir(33); 
+			tree.inserir(35);
+			tree.inserir(37);
+			tree.ImprimeArvore();
+			assertEquals("30·|  33·|    35·|      37", tree.sPrintFinal);
+		}
 
 	@Test
 	public void TestPrintTelaDificil03() {
 			tree = new ArvoreBinaria<Integer>();
 		
-			tree.inserir(262); 
-			tree.inserir(80); 
-			tree.inserir(332);
-			tree.inserir(3); 
-			tree.inserir(164);
-			tree.inserir(297); 
-			tree.inserir(353);
-			tree.inserir(73); 
-			tree.inserir(115); 
-			tree.inserir(199);
-			tree.inserir(276); 
-			tree.inserir(325); 
-			tree.inserir(346);
-			tree.inserir(367);
-			tree.inserir(24); 
-			tree.inserir(143); 
-			tree.inserir(192);
-			tree.inserir(220); 
-			tree.inserir(290); 
-			
-			assertEquals("     |···················262··············|",  tree.PrintNodo(tree.raiz));
+			tree.inserir(7); 
+			tree.inserir(10); 
+			tree.inserir(8);
+			tree.inserir(9); 
+			tree.ImprimeArvore();
+			assertEquals("7···| |·10 8|  9", tree.sPrintFinal);
 		}
 
+
+	@Test
+	public void TestPrintTelaDificil04() {
+			tree = new ArvoreBinaria<Integer>();
+		
+			tree.inserir(20); 
+			tree.inserir(15); 
+			tree.inserir(18);
+			tree.inserir(17); 
+			tree.ImprimeArvore();
+			assertEquals("|·····2015···|  |·18  17", tree.sPrintFinal);
+		}
+
+	@Test
+	public void TestPrintTelaDificil05() {
+			tree = new ArvoreBinaria<Integer>();
+		
+			tree.inserir(50); 
+			tree.inserir(30); 
+			tree.inserir(35);
+			tree.inserir(32); 
+			tree.ImprimeArvore();
+			assertEquals("|·····5030···|  |·35  32", tree.sPrintFinal);
+		}
+
+	
+	
 	@Test
 	public void testContador() {
 			tree = new ArvoreBinaria<Integer>();
 			Random rnd = new Random();
 			
-			for (int i = 0; i < 1500; i++) {
+			for (int i = 0; i < 1100; i++) {
 				int numero;
 				do {
 					numero = rnd.nextInt(1000);
@@ -128,12 +165,11 @@ public class ArvoreBinariaTeste {
 			
 			tree.ImprimeArvore();
 			int QuantNodos = tree.preencheListaNivel(tree.raiz).size();
-			int QuantInstru = tree.Contador;
+			long QuantInstru = tree.Contador;
 			String sDados = String.valueOf(QuantNodos) + ";" + String.valueOf(QuantInstru);
 			tree.Gravar(sDados);
 			System.out.println("NODOS = " + QuantNodos + " Complexidade =" + QuantInstru);
 		}
-
 
 	
 	

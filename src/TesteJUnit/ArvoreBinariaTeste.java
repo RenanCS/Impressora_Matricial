@@ -118,7 +118,7 @@ public class ArvoreBinariaTeste {
 			tree = new ArvoreBinaria<Integer>();
 			Random rnd = new Random();
 			
-			for (int i = 0; i < 3000; i++) {
+			for (int i = 0; i < 1500; i++) {
 				int numero;
 				do {
 					numero = rnd.nextInt(1000);
